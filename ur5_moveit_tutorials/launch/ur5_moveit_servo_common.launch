@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="controllers" doc="Which controllers to launch"/>
+    <arg name="servo_params_file" doc="The servo parameters configuration file"/>
     <include file="$(find ur_gazebo)/launch/ur5_bringup.launch">
-        <arg name="controllers" value="joint_state_controller pos_joint_traj_controller"/>
+        <arg name="controllers" value="$(arg controllers)"/>
         <arg name="stopped_controllers" value=""/>
         <arg name="transmission_hw_interface" value="hardware_interface/PositionJointInterface"/>
         <arg name="paused" value="true"/>
@@ -19,7 +21,7 @@
 
     <!-- Include servo -->
     <node name="servo_server" pkg="moveit_servo" type="servo_server" output="screen" >
-        <rosparam command="load" file="$(find ur5_moveit_tutorials)/config/pos_joint_traj_servo_params.yaml"/>
+        <rosparam command="load" file="$(arg servo_params_file)"/>
     </node>
 
 </launch>
