@@ -4,20 +4,19 @@ import rospy
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 import numpy as np
+import moveit_commander
+import sys
 
 class JointGroupPositionControllerWrapper:
     def __init__(self):
         # Target joint order and positions
-        self.ordered_target_joint_names = [
-            "shoulder_pan_joint", "shoulder_lift_joint",
-            "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"
-        ]
+        moveit_commander.roscpp_initialize(sys.argv)
+        group = moveit_commander.MoveGroupCommander("manipulator", wait_for_servers=60.0)
+        self.ordered_target_joint_names = group.get_active_joints()
+        rospy.loginfo("Available joints: %s", self.ordered_target_joint_names)
         self.target_joint_positions = np.array([-5.62, -1.785, 1.625, -2.737, 5.707, -3.92])
         self.current_joint_positions = None
         self.tolerance = 0.01
-
-        # Initialize the ROS node
-        rospy.init_node('joint_group_position_controller_wrapper', anonymous=True)
 
         # Publisher for the target joint positions
         self.pub = rospy.Publisher(
@@ -57,6 +56,7 @@ class JointGroupPositionControllerWrapper:
 
 if __name__ == '__main__':
     try:
+        rospy.init_node('joint_group_position_controller_wrapper', anonymous=True)
         controller = JointGroupPositionControllerWrapper()
         controller.publish_joint_positions()
     except rospy.ROSInterruptException:

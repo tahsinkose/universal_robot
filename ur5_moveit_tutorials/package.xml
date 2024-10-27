@@ -14,6 +14,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>ur_gazebo</exec_depend>
   <exec_depend>ur5_moveit_config</exec_depend>
+  <exec_depend>moveit_commander</exec_depend>
   <exec_depend>moveit_servo</exec_depend>
 
   <export>

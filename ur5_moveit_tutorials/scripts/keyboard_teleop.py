@@ -4,9 +4,21 @@ import rospy
 from geometry_msgs.msg import TwistStamped
 import sys, select, termios, tty
 import threading
+import moveit_commander
+
+GROUP_NAME = "manipulator"
+
+def get_end_effector_name():
+    moveit_commander.roscpp_initialize(sys.argv)
+    group = moveit_commander.MoveGroupCommander(GROUP_NAME)
+    end_effector_link = group.get_end_effector_link()
+    rospy.loginfo("End effector link for group '%s': %s", GROUP_NAME, end_effector_link)
+
+    return end_effector_link
 
 class TeleopTwistKeyboard:
     def __init__(self):
+        self.end_effector_link = get_end_effector_name()
         # Key mappings for linear and angular velocities
         self.key_bindings = {
             'w': (1, 0, 0, 0, 0, 0),  # Move forward in x
@@ -30,8 +42,6 @@ class TeleopTwistKeyboard:
         self.angular_increment = 0.02
         self.finished_work = False
 
-        # Initialize ROS node
-        rospy.init_node('minimal_teleop_twist_keyboard')
         self.pub = rospy.Publisher('/servo_server/delta_twist_cmds', TwistStamped, queue_size=10)
         
         # Terminal settings
@@ -45,7 +55,7 @@ class TeleopTwistKeyboard:
         rate = rospy.Rate(50)  # Publish rate in Hz
         while not self.finished_work and not rospy.is_shutdown():
             self.last_twist.header.stamp = rospy.Time.now()
-            self.last_twist.header.frame_id = "tool0"
+            self.last_twist.header.frame_id = self.end_effector_link
             self.pub.publish(self.last_twist)
             rate.sleep()
 
@@ -110,5 +120,7 @@ class TeleopTwistKeyboard:
 
 
 if __name__ == "__main__":
+    # Initialize ROS node
+    rospy.init_node('minimal_teleop_twist_keyboard')
     teleop = TeleopTwistKeyboard()
     teleop.run()

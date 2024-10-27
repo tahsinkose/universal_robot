@@ -116,7 +116,7 @@ Visualization Manager:
       Class: rviz/TwistStamped
       Enabled: true
       Hide Small Values: false
-      History Length: 100
+      History Length: 10
       Linear Arrow Scale: 1
       Linear Color: 173; 127; 168
       Name: TwistStamped
@@ -227,7 +227,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.0209804773330688
+      Distance: 1.2807179689407349
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -235,17 +235,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.3974318206310272
-        Y: 0.5043858289718628
-        Z: 0.4968496859073639
+        X: -0.29767945408821106
+        Y: 0.5415677428245544
+        Z: 0.4893118143081665
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9403970241546631
+      Pitch: 0.6853972673416138
       Target Frame: <Fixed Frame>
-      Yaw: 1.830401062965393
+      Yaw: 1.435401439666748
     Saved: ~
 Window Geometry:
   Displays:
