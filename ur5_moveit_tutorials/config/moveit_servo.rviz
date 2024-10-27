@@ -110,14 +110,14 @@ Visualization Manager:
       Update Interval: 0
       Value: true
     - Alpha: 1
-      Angular Arrow Scale: 0.5
+      Angular Arrow Scale: 1
       Angular Color: 204; 204; 51
       Arrow Width: 0.10000000149011612
       Class: rviz/TwistStamped
       Enabled: true
       Hide Small Values: false
       History Length: 10
-      Linear Arrow Scale: 1
+      Linear Arrow Scale: 2
       Linear Color: 173; 127; 168
       Name: TwistStamped
       Queue Size: 10
@@ -243,9 +243,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6853972673416138
+      Pitch: 0.6603972911834717
       Target Frame: <Fixed Frame>
-      Yaw: 1.435401439666748
+      Yaw: 2.030400276184082
     Saved: ~
 Window Geometry:
   Displays:
