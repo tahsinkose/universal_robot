@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="controllers" doc="Which controllers to launch"/>
+    <arg name="controller" doc="Which additional controller to launch"/>
     <arg name="servo_params_file" doc="The servo parameters configuration file"/>
     <include file="$(find ur_gazebo)/launch/ur5_bringup.launch">
-        <arg name="controllers" value="$(arg controllers)"/>
+        <arg name="controllers" value="joint_state_controller $(arg controller)"/>
         <arg name="stopped_controllers" value=""/>
         <arg name="transmission_hw_interface" value="hardware_interface/PositionJointInterface"/>
         <arg name="paused" value="true"/>
@@ -12,6 +12,7 @@
     </include>        
     <include file="$(find ur5_moveit_config)/launch/moveit_planning_execution.launch">
         <arg name="sim" value="true"/>
+        <arg name="controller_name" value="$(arg controller)"/>
     </include>
 
     <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false"
