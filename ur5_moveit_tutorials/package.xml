@@ -16,6 +16,7 @@
   <exec_depend>ur5_moveit_config</exec_depend>
   <exec_depend>moveit_commander</exec_depend>
   <exec_depend>moveit_servo</exec_depend>
+  <exec_depend>joy</exec_depend>
 
   <export>
   </export>
